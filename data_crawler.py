@@ -96,4 +96,4 @@ if __name__ == '__main__':
     city = 'KSFO'
     start_date = '19900101'
     end_date = '19991231'
-    generate_csvfile(city, start_date, end_date, filename="KSFO_1990.csv")
+    generate_csvfile(city, start_date, end_date, filename="data/KSFO_1990.csv")
