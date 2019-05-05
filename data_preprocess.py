@@ -52,7 +52,7 @@ def generate_csvfile(city, start_date, end_date, filename=""):
     current_date = datetime(year=int(start_date[0:4]), month=int(start_date[4:6]), day=int(start_date[6:]))
     end_date = datetime(year=int(end_date[0:4]), month=int(end_date[4:6]), day=int(end_date[6:]))
     last_time = None
-    with open('data/{}.csv'.format(city), 'w+') as file:
+    with open(filename, 'w+') as file:
         writer = csv.writer(file)
         writer.writerow(key_list) # column name
 
@@ -94,6 +94,6 @@ def date_to_str(current_date):
 
 if __name__ == '__main__':
     city = 'KSFO'
-    start_date = '20000101'
-    end_date = '20190430'
-    generate_csvfile(city, start_date, end_date)
+    start_date = '19900101'
+    end_date = '19991231'
+    generate_csvfile(city, start_date, end_date, filename="KSFO_1990.csv")
