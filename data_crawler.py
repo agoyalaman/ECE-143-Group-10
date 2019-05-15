@@ -16,6 +16,14 @@ key_list = ['date','temperature', 'temperature_normal',
             'max_temperature', 'max_temperature_normal', 'max_temperature_record',
             'precip', 'precipnormal', 'preciprecord']
 
+city_code_refer = {'Seattle':'KSEA',
+                   'San Francisco':'KSFO',
+                   'Los Angeles':'KBUR',
+                   'San Diego':'KSAN',
+                   'Houston':'KHOU',
+                   'Boston':'KBOS',
+                   'New York City':'KLGA',
+                   'Washington DC':'KDCA'}
 
 def gather_data(city, date):
     # Get data table
@@ -52,7 +60,7 @@ def generate_csvfile(city, start_date, end_date, filename=""):
     current_date = datetime(year=int(start_date[0:4]), month=int(start_date[4:6]), day=int(start_date[6:]))
     end_date = datetime(year=int(end_date[0:4]), month=int(end_date[4:6]), day=int(end_date[6:]))
     last_time = None
-    with open(filename, 'w+') as file:
+    with open('data/'+filename, 'w+') as file:
         writer = csv.writer(file)
         writer.writerow(key_list) # column name
 
@@ -68,7 +76,7 @@ def generate_csvfile(city, start_date, end_date, filename=""):
                     else:
                         print('time spent: {}s'.format((current_time - last_time).seconds))
                         last_time = current_time
-                    print('Gathering data of year:{}, month:{}.'.format(date[0:4], date[4:6]))
+                    print('Gathering data of {} in year:{}, month:{}.'.format(city, date[0:4], date[4:6]))
                 data = gather_data(city, date)
                 writer.writerow(data)
                 #print(date)
@@ -78,6 +86,7 @@ def generate_csvfile(city, start_date, end_date, filename=""):
 
             current_date += timedelta(days=1)
     print('cvs file has generated to {}'.format(file.name))
+
 
 def date_to_str(current_date):
     year = str(current_date.year)
@@ -91,9 +100,10 @@ def date_to_str(current_date):
     return date
 
 
-
 if __name__ == '__main__':
-    city = 'KSFO'
     start_date = '19900101'
-    end_date = '19991231'
-    generate_csvfile(city, start_date, end_date, filename="data/KSFO_1990.csv")
+    end_date = '20190430'
+    for city in list(city_code_refer.values()):
+        fname = city + '.csv'
+        generate_csvfile(city, start_date, end_date, filename=fname)
+        print('-------------------------------------------')
