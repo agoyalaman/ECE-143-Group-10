@@ -7,23 +7,12 @@ import json
 import time
 import requests
 import warnings
+import pandas as pd
+from global_variables import *
 from datetime import datetime, timedelta
 
 warnings.filterwarnings('ignore')
 
-key_list = ['date','temperature', 'temperature_normal',
-            'min_temperature', 'min_temperature_normal', 'min_temperature_record',
-            'max_temperature', 'max_temperature_normal', 'max_temperature_record',
-            'precip', 'precipnormal', 'preciprecord']
-
-city_code_refer = {'Seattle':'KSEA',
-                   'San Francisco':'KSFO',
-                   'Los Angeles':'KBUR',
-                   'San Diego':'KSAN',
-                   'Houston':'KHOU',
-                   'Boston':'KBOS',
-                   'New York City':'KLGA',
-                   'Washington DC':'KDCA'}
 
 def gather_data(city, date):
     # Get data table
@@ -39,7 +28,7 @@ def gather_data(city, date):
 
 
 def format_data(table, date, key_list):
-    data = []
+    data = list()
     data.append(str(date))
     for key in key_list[1:]:
         data.append(str(table[key]))
@@ -100,10 +89,31 @@ def date_to_str(current_date):
     return date
 
 
+def print_info(city='KSAN', date='19900101',key_step=5):
+    session = requests.session()
+    response = session.get(
+        'https://api-ak.wunderground.com/api/d8585d80376a429e/history_{}/lang:EN/units:english/bestfct:1/v:2.0/q/'
+        '{}.json?showObs=0&ttl=120'.format(date, city), headers=None, verify=False)
+    dictionary = json.loads(response.text)
+    table = dictionary['history']['days'][0]['summary']
+    table['date'] = date
+    print('The table  is:\n', pd.Series(table))
+    all_key_list = list(table.keys())
+    print('The list of table\'s key is:')
+    if key_step >= 1:
+        for i in range(len(all_key_list)):
+            if i*key_step < len(all_key_list):
+                print(all_key_list[i*key_step:(i+1)*key_step])
+
+
 if __name__ == '__main__':
+    #print_info()
     start_date = '19900101'
     end_date = '20190430'
     for city in list(city_code_refer.values()):
         fname = city + '.csv'
         generate_csvfile(city, start_date, end_date, filename=fname)
         print('-------------------------------------------')
+
+
+
