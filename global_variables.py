@@ -14,14 +14,7 @@ all_key_list = ['date', 'temperature', 'dewpoint', 'pressure', 'wind_speed', 'wi
                 'since1sepcoolingdegreedays', 'since1sepcoolingdegreedaysnormal', 'since1jancoolingdegreedays',
                 'since1jancoolingdegreedaysnormal', 'avgoktas', 'icon']
 
-key_list = ['date','temperature', 'temperature_normal',
-            'min_temperature', 'min_temperature_normal', 'min_temperature_record',
-            'max_temperature', 'max_temperature_normal', 'max_temperature_record',
-            'precip', 'precipnormal', 'preciprecord']
-
-new_key_list = ['date','temperature', 'min_temperature', 'max_temperature', 'min_temperature_record', 'max_temperature_record',
-            'precip', 'preciprecord']
-
+key_list = ['date','temperature', 'min_temperature', 'max_temperature', 'precip', 'icon']
 
 city_code_refer = {'Seattle':'KSEA',
                    'San Francisco':'KSFO',

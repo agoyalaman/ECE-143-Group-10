@@ -30,7 +30,7 @@ def gather_data(city, date):
 def format_data(table, date, key_list):
     data = list()
     data.append(str(date))
-    for key in key_list[1:]:
+    for key in all_key_list[1:]:
         data.append(str(table[key]))
     return data
 
@@ -51,7 +51,7 @@ def generate_csvfile(city, start_date, end_date, filename=""):
     last_time = None
     with open('data/'+filename, 'w+') as file:
         writer = csv.writer(file)
-        writer.writerow(key_list) # column name
+        writer.writerow(all_key_list) # column name
 
         while current_date != end_date + timedelta(days=1):
 
