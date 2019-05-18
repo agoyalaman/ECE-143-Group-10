@@ -7,6 +7,11 @@ from global_variables import *
 
 
 def clean_data(fname):
+    '''
+    clean data by select specified columns and auto forward-fill
+    :param fname: data file name
+    :return:
+    '''
     missing_values = ["n/a", "na", "--", None,'None']
     origin_data = pd.read_csv(fname, na_values=missing_values)
     cleaned_data = origin_data[ key_list]
@@ -16,6 +21,9 @@ def clean_data(fname):
 
 
 if __name__ == '__main__':
-    # clean_data('data/KSEA.csv')
+    # clean_data
+    '''
     for city in list(city_code_refer.values()):
         clean_data('data/{}.csv'.format(city))
+    '''
+    pass

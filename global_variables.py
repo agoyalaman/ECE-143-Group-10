@@ -1,3 +1,7 @@
+'''
+Global variables
+'''
+# original data's key
 all_key_list = ['date', 'temperature', 'dewpoint', 'pressure', 'wind_speed', 'wind_dir',
                 'wind_dir_degrees', 'visibility', 'humidity', 'max_temperature', 'min_temperature',
                 'temperature_normal', 'min_temperature_normal', 'max_temperature_normal', 'min_temperature_record',
@@ -14,8 +18,10 @@ all_key_list = ['date', 'temperature', 'dewpoint', 'pressure', 'wind_speed', 'wi
                 'since1sepcoolingdegreedays', 'since1sepcoolingdegreedaysnormal', 'since1jancoolingdegreedays',
                 'since1jancoolingdegreedaysnormal', 'avgoktas', 'icon']
 
+# clean data's key
 key_list = ['date','temperature', 'min_temperature', 'max_temperature', 'precip', 'icon']
 
+# city code reference
 city_code_refer = {'Seattle':'KSEA',
                    'San Francisco':'KSFO',
                    'Los Angeles':'KBUR',

@@ -15,6 +15,12 @@ warnings.filterwarnings('ignore')
 
 
 def gather_data(city, date):
+    '''
+    gather the data table form website for a specific city and date
+    :param city: str, city code
+    :param date: str, eg:20180101
+    :return: data table on the websit
+    '''
     # Get data table
     session = requests.session()
     response = session.get('https://api-ak.wunderground.com/api/d8585d80376a429e/history_{}/lang:EN/units:english/bestfct:1/v:2.0/q/'
@@ -28,6 +34,13 @@ def gather_data(city, date):
 
 
 def format_data(table, date, key_list):
+    '''
+
+    :param table: data table
+    :param date: str
+    :param key_list: the key name of data want to be gather
+    :return: formatted data list
+    '''
     data = list()
     data.append(str(date))
     for key in all_key_list[1:]:
@@ -36,6 +49,14 @@ def format_data(table, date, key_list):
 
 
 def generate_csvfile(city, start_date, end_date, filename=""):
+    '''
+    gather data from start date to end date
+    :param city: city code
+    :param start_date: start date
+    :param end_date: end data
+    :param filename: specified filename under path'data/'
+    :return:
+    '''
     # Validation
     assert isinstance(city, str), "city is not valid"
     assert isinstance(start_date, str) and len(start_date) == 8, "date is not valid"
@@ -78,6 +99,11 @@ def generate_csvfile(city, start_date, end_date, filename=""):
 
 
 def date_to_str(current_date):
+    '''
+    change date object to 8 digit date string
+    :param current_date: date object
+    :return: 8 digit date string
+    '''
     year = str(current_date.year)
     month = str(current_date.month)
     day = str(current_date.day)
@@ -90,6 +116,13 @@ def date_to_str(current_date):
 
 
 def print_info(city='KSAN', date='19900101',key_step=5):
+    '''
+    helper function, show data information
+    :param city: city code
+    :param date: 8 digit date string
+    :param key_step: the number of keys printed out every row
+    :return:
+    '''
     session = requests.session()
     response = session.get(
         'https://api-ak.wunderground.com/api/d8585d80376a429e/history_{}/lang:EN/units:english/bestfct:1/v:2.0/q/'
@@ -107,13 +140,17 @@ def print_info(city='KSAN', date='19900101',key_step=5):
 
 
 if __name__ == '__main__':
-    #print_info()
+    # info
+    print_info()
+    # gather data
+    '''
     start_date = '19900101'
     end_date = '20190430'
     for city in list(city_code_refer.values()):
         fname = city + '.csv'
         generate_csvfile(city, start_date, end_date, filename=fname)
         print('-------------------------------------------')
-
+    '''
+    pass
 
 
