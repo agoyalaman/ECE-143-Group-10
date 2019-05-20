@@ -30,3 +30,4 @@ city_code_refer = {'Seattle':'KSEA',
                    'Boston':'KBOS',
                    'New York City':'KLGA',
                    'Washington DC':'KDCA'}
+code_city_refer = dict([(city_code_refer[city],city) for city in city_code_refer.keys()])
